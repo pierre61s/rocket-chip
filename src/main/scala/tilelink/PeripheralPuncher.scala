@@ -24,8 +24,8 @@ abstract class TLPeripheralPuncher[T <: Data](
 
   protected val tlControlXing = new TLCrossingHelper(this)
   protected val intXing = new IntCrossingHelper(this)
-  def crossControl(crossing: ClockCrossingType)(implicit p: Parameters): TLNode = node := tlControlXing.crossIn(crossing)
-  def crossInt(crossing: ClockCrossingType)(implicit p: Parameters): IntNode = intXing.crossOut(crossing) := intnode
+  def crossControl(crossing: ClockCrossingType = NoCrossing)(implicit p: Parameters): TLNode = node := tlControlXing.crossIn(crossing)
+  def crossInt(crossing: ClockCrossingType = NoCrossing)(implicit p: Parameters): IntNode = intXing.crossOut(crossing) := intnode
 
   val ioNode = BundleBridgeSource(() => portBundle.cloneType)
   val port = InModuleBody { ioNode.out.head._1 }
